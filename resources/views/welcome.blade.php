@@ -300,8 +300,7 @@
                 <!-- Clean CSS Grid for CMS robust display (replacing complex slider) -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           
-                    <!-- Hint for Blade: You can add `data-aos-delay="{{ $loop->iteration * 100 }}"` -->
-          <div class="relative overflow-hidden bg-white border border-brand-creamDark/80 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group" data-aos="fade-up" data-aos-delay="100">
+                              <div class="relative overflow-hidden bg-white border border-brand-creamDark/80 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group" data-aos="fade-up" data-aos-delay="100">
             <div class="absolute right-6 top-6 text-brand-creamDark text-7xl font-serif select-none pointer-events-none opacity-50 z-10 group-hover:text-brand-gold/10 transition-colors">“</div>
             
             <div class="flex items-center gap-4 mb-6 relative z-20">
