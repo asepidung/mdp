@@ -78,8 +78,8 @@
         <nav class="hidden md:flex items-center space-x-8">
                     <a href="#beranda" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Beranda</a>
           <a href="#tentang" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Tentang Kami</a>
-          <a href="#menu" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Menu Bento</a>
-          <a href="#testimoni" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Ulasan</a>
+          <a href="#menu" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Galeri</a>
+          <a href="#testimoni" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Testimoni</a>
           <a href="#kontak" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Kontak</a>
                   </nav>
 
@@ -198,19 +198,21 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           
-          <!-- Photo Collage Left -->
-          <div class="grid grid-cols-2 gap-4 relative">
-            <div class="absolute inset-0 bg-brand-gold/5 rounded-3xl blur-2xl -z-10"></div>
-            <!-- Left Column -->
-            <div class="space-y-4">
-                            <img src="{{ asset('assets/img/puding-2.jpg') }}') }}" alt="Bahan Susu Asli" class="w-full h-36 md:h-48 lg:h-56 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="100">
-                                          <img src="{{ asset('assets/img/puding-3.jpg') }}') }}" alt="Kemasan Premium" class="w-full h-36 md:h-60 lg:h-72 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="300">
-                          </div>
-            <!-- Right Column (Staggered offset) -->
-            <div class="space-y-4 md:pt-10">
-                            <img src="{{ asset('assets/img/puding-4.jpg') }}') }}" alt="Penyajian Estetis" class="w-full h-36 md:h-60 lg:h-72 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="200">
-                                          <img src="{{ asset('assets/img/puding-5.jpg') }}') }}" alt="Detail Tekstur" class="w-full h-36 md:h-48 lg:h-56 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="400">
-                          </div>
+          <!-- Video Player Left -->
+          <div class="relative w-full rounded-[2rem] overflow-hidden shadow-2xl border border-brand-creamDark/50 group" data-aos="fade-up" data-aos-delay="100">
+            <div class="absolute inset-0 bg-brand-gold/10 rounded-[2rem] blur-2xl -z-10"></div>
+            <video 
+              class="w-full h-auto max-h-[500px] object-cover rounded-[2rem] transform transition-transform duration-700 group-hover:scale-105"
+              autoplay 
+              loop 
+              muted 
+              playsinline>
+              <source src="{{ asset('assets/videos/video.mp4') }}" type="video/mp4">
+              Browser Anda tidak mendukung tag video.
+            </video>
+            
+            <!-- Subtle overlay gradient -->
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-chocolate/40 to-transparent pointer-events-none rounded-[2rem]"></div>
           </div>
 
           <!-- Content Right -->
