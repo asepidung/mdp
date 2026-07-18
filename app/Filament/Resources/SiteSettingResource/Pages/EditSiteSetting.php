@@ -8,14 +8,12 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditSiteSetting extends EditRecord
 {
-    use EditRecord\Concerns\Translatable;
 
     protected static string $resource = SiteSettingResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
         ];
     }
 }

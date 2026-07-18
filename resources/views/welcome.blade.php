@@ -6,6 +6,9 @@
   <title>Mbok Dewor Puding - Premium F&B Dessert</title>
   <meta name="description" content="Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor. Puding premium susu asli dengan kualitas rasa premium & kemasan elegan.">
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
+
   <!-- Google Fonts: Poppins (Mandatory) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,11 +72,7 @@
         </a>
 
         
-          <!-- Language Switcher -->
-          <a href="{{ route('lang.switch', app()->getLocale() == 'id' ? 'en' : 'id') }}" class="flex items-center gap-1 font-bold text-brand-chocolate hover:text-brand-gold transition-colors duration-200">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"></path></svg>
-            <span class="uppercase">{{ app()->getLocale() == 'id' ? 'EN' : 'ID' }}</span>
-          </a>
+          
 
         <!-- Desktop Menu -->
         <nav class="hidden md:flex items-center space-x-8">
@@ -177,7 +176,7 @@
               <!-- Gold solid backup card -->
               <div class="absolute inset-2 bg-gradient-to-tr from-brand-gold/30 to-amber-200/40 rounded-[2.5rem] rotate-3 shadow-lg transition-transform duration-700 hover:rotate-0"></div>
               
-                            <img src="{{ asset('assets/img/puding-1.jpg') }}" alt="Puding Mewah Mbok Dewor" class="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-4 border-white transition-transform duration-700 hover:scale-[1.02]">
+                            <img src="{{ asset('assets/img/puding-1.jpg') }}') }}" alt="Puding Mewah Mbok Dewor" class="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-4 border-white transition-transform duration-700 hover:scale-[1.02]">
                             
               <!-- Premium Badge Floating -->
               <div class="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg border border-white flex items-center gap-2 animate-bounce">
@@ -204,13 +203,13 @@
             <div class="absolute inset-0 bg-brand-gold/5 rounded-3xl blur-2xl -z-10"></div>
             <!-- Left Column -->
             <div class="space-y-4">
-                            <img src="{{ asset('assets/img/puding-2.jpg') }}" alt="Bahan Susu Asli" class="w-full h-36 md:h-48 lg:h-56 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="100">
-                                          <img src="{{ asset('assets/img/puding-3.jpg') }}" alt="Kemasan Premium" class="w-full h-36 md:h-60 lg:h-72 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="300">
+                            <img src="{{ asset('assets/img/puding-2.jpg') }}') }}" alt="Bahan Susu Asli" class="w-full h-36 md:h-48 lg:h-56 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="100">
+                                          <img src="{{ asset('assets/img/puding-3.jpg') }}') }}" alt="Kemasan Premium" class="w-full h-36 md:h-60 lg:h-72 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="300">
                           </div>
             <!-- Right Column (Staggered offset) -->
             <div class="space-y-4 md:pt-10">
-                            <img src="{{ asset('assets/img/puding-4.jpg') }}" alt="Penyajian Estetis" class="w-full h-36 md:h-60 lg:h-72 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="200">
-                                          <img src="{{ asset('assets/img/puding-5.jpg') }}" alt="Detail Tekstur" class="w-full h-36 md:h-48 lg:h-56 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="400">
+                            <img src="{{ asset('assets/img/puding-4.jpg') }}') }}" alt="Penyajian Estetis" class="w-full h-36 md:h-60 lg:h-72 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="200">
+                                          <img src="{{ asset('assets/img/puding-5.jpg') }}') }}" alt="Detail Tekstur" class="w-full h-36 md:h-48 lg:h-56 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="400">
                           </div>
           </div>
 
@@ -263,9 +262,9 @@
           @forelse($products as $product)
           <div class="group bg-white rounded-[2rem] p-3 border border-brand-creamDark/50 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col h-full hover:-translate-y-2" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 50 }}">
             <div class="overflow-hidden rounded-3xl w-full relative">
-              <img src="{{ $product->image_path ? Storage::url($product->image_path) : asset('assets/img/puding-1.jpg') }}" alt="{{ $product->name }}" class="w-full aspect-square object-cover rounded-3xl transform group-hover:scale-110 transition-transform duration-700">
+              <img src="{{ $product->image_path ? Storage::url($product->image_path) : asset('assets/img/puding-1.jpg') }}') }}" alt="{{ $product->name }}" class="w-full aspect-square object-cover rounded-3xl transform group-hover:scale-110 transition-transform duration-700">
               <div class="absolute inset-0 bg-brand-chocolate/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                <button type="button" @click.prevent="lightboxOpen = true; lightboxImage = '{{ $product->image_path ? Storage::url($product->image_path) : asset('assets/img/puding-1.jpg') }}'" class="px-5 py-2.5 bg-brand-gold text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-brand-goldDark flex items-center gap-2">
+                <button type="button" @click.prevent="lightboxOpen = true; lightboxImage = '{{ $product->image_path ? Storage::url($product->image_path) : asset('assets/img/puding-1.jpg') }}') }}'" class="px-5 py-2.5 bg-brand-gold text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-brand-goldDark flex items-center gap-2">
                   <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg> Perbesar
                 </button>
               </div>

@@ -23,5 +23,16 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('91142552'),
             ]);
         }
+
+        // Seed Default Settings
+        $settings = [
+            ['key' => 'whatsapp_number', 'value' => '081335374099'],
+            ['key' => 'hero_title', 'value' => 'Rasakan Kelezatan Puding Asli Mbok Dewor'],
+            ['key' => 'about_text', 'value' => 'Setiap puding dari Mbok Dewor dibuat secara eksklusif menggunakan susu segar berkualitas tinggi, buah-buahan terbaik, dan tanpa pengawet buatan.'],
+        ];
+
+        foreach ($settings as $setting) {
+            \App\Models\SiteSetting::updateOrCreate(['key' => $setting['key']], ['value' => $setting['value']]);
+        }
     }
 }

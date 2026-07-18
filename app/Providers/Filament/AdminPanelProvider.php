@@ -28,7 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(\App\Filament\Pages\Auth\Login::class)
             ->brandName('Admin Mbok Dewor')
-            ->favicon(asset('logo.png'))
+            ->favicon(asset('assets/img/favicon.png'))
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -42,7 +42,6 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
-            ->plugin(\Filament\SpatieLaravelTranslatablePlugin::make()->defaultLocales(['id', 'en']))
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

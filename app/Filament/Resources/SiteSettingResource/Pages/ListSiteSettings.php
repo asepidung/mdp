@@ -8,14 +8,12 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListSiteSettings extends ListRecords
 {
-    use ListRecords\Concerns\Translatable;
 
     protected static string $resource = SiteSettingResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
         ];
     }
 }
