@@ -50,8 +50,7 @@
 </head>
 <body x-data="{ lightboxOpen: false, lightboxImage: '' }" class="bg-brand-cream text-brand-chocolate min-h-screen overflow-x-hidden antialiased">
 
-  <!-- @section('header') -->
-  <!-- Header / Navbar (Alpine.js State) -->
+    <!-- Header / Navbar (Alpine.js State) -->
   <header x-data="{ mobileMenuOpen: false, scrolled: false }" 
           @scroll.window="scrolled = (window.pageYOffset > 20)"
           :class="scrolled ? 'nav-scrolled py-2' : 'bg-transparent py-4'"
@@ -62,14 +61,10 @@
         
         <!-- Logo -->
         <a href="#" class="flex items-center gap-3 group">
-          <!-- @if($site_logo) -->
-          <img src="{{ asset('assets/img/logo.png') }}" alt="Mbok Dewor Puding Logo" class="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
-          <!-- @endif -->
-          <div class="flex flex-col">
-            <!-- @if($site_name) -->
-            <span class="text-base md:text-lg font-extrabold tracking-tight text-brand-chocolate leading-none">Mbok Dewor</span>
-            <!-- @endif -->
-            <span class="text-[9px] uppercase tracking-widest text-brand-gold font-bold">Premium Dessert</span>
+                    <img src="{{ asset('assets/img/logo.png') }}" alt="Mbok Dewor Puding Logo" class="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105">
+                    <div class="flex flex-col">
+                        <span class="text-base md:text-lg font-extrabold tracking-tight text-brand-chocolate leading-none">Mbok Dewor</span>
+                        <span class="text-[9px] uppercase tracking-widest text-brand-gold font-bold">Premium Dessert</span>
           </div>
         </a>
 
@@ -82,14 +77,12 @@
 
         <!-- Desktop Menu -->
         <nav class="hidden md:flex items-center space-x-8">
-          <!-- @foreach($nav_links as $link) -->
-          <a href="#beranda" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Beranda</a>
+                    <a href="#beranda" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Beranda</a>
           <a href="#tentang" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Tentang Kami</a>
           <a href="#menu" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Menu Bento</a>
           <a href="#testimoni" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Ulasan</a>
           <a href="#kontak" class="font-medium text-brand-chocolate hover:text-brand-gold transition-colors duration-200">Kontak</a>
-          <!-- @endforeach -->
-        </nav>
+                  </nav>
 
         <!-- Mobile Menu Toggle Button -->
         <div class="flex items-center md:hidden">
@@ -118,14 +111,12 @@
          x-transition:leave-end="opacity-0 -translate-y-2"
          x-cloak
          class="md:hidden bg-white/95 backdrop-blur-lg border-b border-brand-creamDark px-4 pt-2 pb-6 space-y-2 absolute w-full shadow-xl">
-      <!-- @foreach($nav_links as $link) -->
-      <a @click="mobileMenuOpen = false" href="#beranda" class="block px-4 py-2.5 rounded-xl font-medium text-brand-chocolate hover:bg-brand-creamDark transition-all">Beranda</a>
+            <a @click="mobileMenuOpen = false" href="#beranda" class="block px-4 py-2.5 rounded-xl font-medium text-brand-chocolate hover:bg-brand-creamDark transition-all">Beranda</a>
       <a @click="mobileMenuOpen = false" href="#tentang" class="block px-4 py-2.5 rounded-xl font-medium text-brand-chocolate hover:bg-brand-creamDark transition-all">Tentang Kami</a>
       <a @click="mobileMenuOpen = false" href="#menu" class="block px-4 py-2.5 rounded-xl font-medium text-brand-chocolate hover:bg-brand-creamDark transition-all">Menu Bento</a>
       <a @click="mobileMenuOpen = false" href="#testimoni" class="block px-4 py-2.5 rounded-xl font-medium text-brand-chocolate hover:bg-brand-creamDark transition-all">Ulasan</a>
       <a @click="mobileMenuOpen = false" href="#kontak" class="block px-4 py-2.5 rounded-xl font-medium text-brand-chocolate hover:bg-brand-creamDark transition-all">Kontak</a>
-      <!-- @endforeach -->
-      <div class="pt-4 border-t border-brand-creamDark">
+            <div class="pt-4 border-t border-brand-creamDark">
         <a href="https://wa.me/62{{ ltrim($settings['whatsapp_number'] ?? '081335374099', '0') }}" 
            target="_blank"
            class="flex items-center justify-center w-full py-3.5 rounded-full bg-brand-gold text-white font-semibold shadow-md gap-2">
@@ -134,11 +125,9 @@
       </div>
     </div>
   </header>
-  <!-- @endsection -->
-
+  
   <main id="beranda" class="pt-24 md:pt-32">
-    <!-- @section('hero') -->
-    <!-- Hero Section -->
+        <!-- Hero Section -->
     <section class="relative pb-20 md:pb-32 overflow-hidden">
       <!-- Fluid background shapes for modern look -->
       <div class="absolute -top-24 -left-20 w-80 h-80 bg-brand-gold/10 rounded-full blur-3xl opacity-60"></div>
@@ -155,21 +144,16 @@
               F&B Premium Artisan Pudding
             </div>
 
-            <!-- @if($hero_headline) -->
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-brand-chocolate leading-[1.15] mb-6">
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-brand-chocolate leading-[1.15] mb-6">
               {{ $settings['hero_title'] ?? 'Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor.' }}
             </h1>
-            <!-- @endif -->
-
-            <!-- @if($hero_subheadline) -->
-            <p class="text-sm sm:text-base md:text-lg text-brand-chocolateLight max-w-xl mb-10 leading-relaxed font-light">
+            
+                        <p class="text-sm sm:text-base md:text-lg text-brand-chocolateLight max-w-xl mb-10 leading-relaxed font-light">
               Sensasi dessert lumer berkelas dunia yang dibuat secara higienis menggunakan susu segar murni dan bahan organik premium. Tekstur selembut sutra yang siap memanjakan setiap suapan.
             </p>
-            <!-- @endif -->
-
+            
             <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <!-- @if($hero_cta_text) -->
-              <a href="https://wa.me/62{{ ltrim($settings['whatsapp_number'] ?? '081335374099', '0') }}" 
+                            <a href="https://wa.me/62{{ ltrim($settings['whatsapp_number'] ?? '081335374099', '0') }}" 
                  target="_blank"
                  class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-brand-gold hover:bg-brand-goldDark text-white font-bold transition-all duration-300 shadow-lg hover:shadow-brand-gold/30 hover:shadow-2xl transform hover:-translate-y-1 gap-2.5 text-sm md:text-base group">
                 <span>Pesan Sekarang</span>
@@ -177,8 +161,7 @@
                   <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
                 </svg>
               </a>
-              <!-- @endif -->
-              <a href="#menu" 
+                            <a href="#menu" 
                  class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-white hover:bg-brand-creamDark text-brand-chocolate border border-brand-creamDark font-bold transition-all duration-300 shadow-sm hover:shadow-md transform hover:-translate-y-1 text-sm md:text-base">
                 Explore Menu
               </a>
@@ -194,10 +177,8 @@
               <!-- Gold solid backup card -->
               <div class="absolute inset-2 bg-gradient-to-tr from-brand-gold/30 to-amber-200/40 rounded-[2.5rem] rotate-3 shadow-lg transition-transform duration-700 hover:rotate-0"></div>
               
-              <!-- @if($hero_image) -->
-              <img src="{{ asset('assets/img/puding-1.jpg') }}" alt="Puding Mewah Mbok Dewor" class="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-4 border-white transition-transform duration-700 hover:scale-[1.02]">
-              <!-- @endif -->
-              
+                            <img src="{{ asset('assets/img/puding-1.jpg') }}" alt="Puding Mewah Mbok Dewor" class="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-4 border-white transition-transform duration-700 hover:scale-[1.02]">
+                            
               <!-- Premium Badge Floating -->
               <div class="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg border border-white flex items-center gap-2 animate-bounce">
                 <span class="text-brand-gold text-lg">⭐</span>
@@ -209,10 +190,8 @@
         </div>
       </div>
     </section>
-    <!-- @endsection -->
-
-    <!-- @section('about') -->
-    <!-- Tentang Kami -->
+    
+        <!-- Tentang Kami -->
     <section id="tentang" class="py-20 bg-brand-creamDark/30 border-y border-brand-creamDark/60 relative overflow-hidden">
       <!-- Decorative circle -->
       <div class="absolute -right-40 bottom-0 w-96 h-96 border-[40px] border-white/50 rounded-full blur-sm opacity-50"></div>
@@ -225,38 +204,26 @@
             <div class="absolute inset-0 bg-brand-gold/5 rounded-3xl blur-2xl -z-10"></div>
             <!-- Left Column -->
             <div class="space-y-4">
-              <!-- @if($about_images[0]) -->
-              <img src="{{ asset('assets/img/puding-2.jpg') }}" alt="Bahan Susu Asli" class="w-full h-36 md:h-48 lg:h-56 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="100">
-              <!-- @endif -->
-              <!-- @if($about_images[1]) -->
-              <img src="{{ asset('assets/img/puding-3.jpg') }}" alt="Kemasan Premium" class="w-full h-36 md:h-60 lg:h-72 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="300">
-              <!-- @endif -->
-            </div>
+                            <img src="{{ asset('assets/img/puding-2.jpg') }}" alt="Bahan Susu Asli" class="w-full h-36 md:h-48 lg:h-56 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="100">
+                                          <img src="{{ asset('assets/img/puding-3.jpg') }}" alt="Kemasan Premium" class="w-full h-36 md:h-60 lg:h-72 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="300">
+                          </div>
             <!-- Right Column (Staggered offset) -->
             <div class="space-y-4 md:pt-10">
-              <!-- @if($about_images[2]) -->
-              <img src="{{ asset('assets/img/puding-4.jpg') }}" alt="Penyajian Estetis" class="w-full h-36 md:h-60 lg:h-72 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="200">
-              <!-- @endif -->
-              <!-- @if($about_images[3]) -->
-              <img src="{{ asset('assets/img/puding-5.jpg') }}" alt="Detail Tekstur" class="w-full h-36 md:h-48 lg:h-56 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="400">
-              <!-- @endif -->
-            </div>
+                            <img src="{{ asset('assets/img/puding-4.jpg') }}" alt="Penyajian Estetis" class="w-full h-36 md:h-60 lg:h-72 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="200">
+                                          <img src="{{ asset('assets/img/puding-5.jpg') }}" alt="Detail Tekstur" class="w-full h-36 md:h-48 lg:h-56 object-cover rounded-3xl shadow-md transform hover:scale-105 transition-transform duration-500" data-aos="fade-up" data-aos-delay="400">
+                          </div>
           </div>
 
           <!-- Content Right -->
           <div data-aos="fade-left" data-aos-duration="1000">
             <span class="text-xs font-bold text-brand-gold uppercase tracking-widest block mb-3">Filosofi Rasa</span>
-            <!-- @if($about_title) -->
-            <h2 class="text-3xl md:text-4xl font-black text-brand-chocolate leading-tight mb-6">
+                        <h2 class="text-3xl md:text-4xl font-black text-brand-chocolate leading-tight mb-6">
               Dibuat dengan Bahan Susu Premium Pilihan & Penuh Kasih Sayang
             </h2>
-            <!-- @endif -->
-            
+                        
             <div class="space-y-4 text-sm sm:text-base text-brand-chocolateLight leading-relaxed mb-10 font-light">
-              <!-- @if($about_content) -->
-              {{ $settings['about_text'] ?? 'Setiap puding dari Mbok Dewor dibuat secara eksklusif (artisan).' }}
-              <!-- @endif -->
-            </div>
+                            {{ $settings['about_text'] ?? 'Setiap puding dari Mbok Dewor dibuat secara eksklusif (artisan).' }}
+                          </div>
 
             <!-- Occasions grid cards -->
             <div class="grid grid-cols-3 gap-4">
@@ -279,24 +246,19 @@
         </div>
       </div>
     </section>
-    <!-- @endsection -->
-
-    <!-- @section('menu') -->
-    <!-- Menu / Gallery Section (Bento Grid) -->
+    
+        <!-- Menu / Gallery Section (Bento Grid) -->
     <section id="menu" class="py-20 md:py-28 relative">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
           <span class="text-xs font-bold text-brand-gold uppercase tracking-widest block mb-3">Signature Menu</span>
-          <!-- @if($menu_title) -->
-          <h2 class="text-3xl md:text-4xl font-black text-brand-chocolate">Galeri Kreasi Puding</h2>
-          <!-- @endif -->
-          <div class="w-16 h-1.5 bg-brand-gold mx-auto mt-6 rounded-full"></div>
+                    <h2 class="text-3xl md:text-4xl font-black text-brand-chocolate">Galeri Kreasi Puding</h2>
+                    <div class="w-16 h-1.5 bg-brand-gold mx-auto mt-6 rounded-full"></div>
         </div>
 
         <!-- Modern Bento Grid with CMS Safeguards -->
-        <!-- @if($products->count() > 0) -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           @forelse($products as $product)
           <div class="group bg-white rounded-[2rem] p-3 border border-brand-creamDark/50 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col h-full hover:-translate-y-2" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 50 }}">
@@ -318,14 +280,11 @@
 @endforelse
           
         </div>
-        <!-- @endif -->
-
+        
       </div>
     </section>
-    <!-- @endsection -->
-
-    <!-- @section('testimonials') -->
-    <!-- Testimoni Section (Modern Cards) -->
+    
+        <!-- Testimoni Section (Modern Cards) -->
     <section id="testimoni" class="py-20 bg-brand-creamDark/40 border-t border-b border-brand-creamDark/60 relative overflow-hidden">
       <!-- Background pattern -->
       <div class="absolute inset-0 bg-[radial-gradient(#D97706_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03]"></div>
@@ -334,18 +293,14 @@
         
         <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
           <span class="text-xs font-bold text-brand-gold uppercase tracking-widest block mb-3">Ulasan Pelanggan</span>
-          <!-- @if($testimoni_title) -->
-          <h2 class="text-3xl font-black text-brand-chocolate">Apa Kata Mereka?</h2>
-          <!-- @endif -->
-          <div class="w-16 h-1.5 bg-brand-gold mx-auto mt-6 rounded-full"></div>
+                    <h2 class="text-3xl font-black text-brand-chocolate">Apa Kata Mereka?</h2>
+                    <div class="w-16 h-1.5 bg-brand-gold mx-auto mt-6 rounded-full"></div>
         </div>
 
-        <!-- @if($testimonials->count() > 0) -->
-        <!-- Clean CSS Grid for CMS robust display (replacing complex slider) -->
+                <!-- Clean CSS Grid for CMS robust display (replacing complex slider) -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           
-          <!-- @foreach($testimonials as $testimonial) -->
-          <!-- Hint for Blade: You can add `data-aos-delay="{{ $loop->iteration * 100 }}"` -->
+                    <!-- Hint for Blade: You can add `data-aos-delay="{{ $loop->iteration * 100 }}"` -->
           <div class="relative overflow-hidden bg-white border border-brand-creamDark/80 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group" data-aos="fade-up" data-aos-delay="100">
             <div class="absolute right-6 top-6 text-brand-creamDark text-7xl font-serif select-none pointer-events-none opacity-50 z-10 group-hover:text-brand-gold/10 transition-colors">“</div>
             
@@ -354,33 +309,25 @@
                 AI
               </div>
               <div>
-                <!-- @if($testimonial->name) -->
-                <h4 class="font-bold text-base text-brand-chocolate leading-none">Asep idung</h4>
-                <!-- @endif -->
-                <div class="flex gap-1 mt-2 text-brand-gold text-xs">
+                                <h4 class="font-bold text-base text-brand-chocolate leading-none">Asep idung</h4>
+                                <div class="flex gap-1 mt-2 text-brand-gold text-xs">
                   <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                 </div>
               </div>
             </div>
 
-            <!-- @if($testimonial->content) -->
-            <p class="text-sm md:text-base text-brand-chocolateLight italic font-light leading-relaxed flex-grow line-clamp-4 relative z-20">
+                        <p class="text-sm md:text-base text-brand-chocolateLight italic font-light leading-relaxed flex-grow line-clamp-4 relative z-20">
               "Gila pudingnya beneran lumer di mulut! Pesen buat acara anniversary, istri saya seneng banget. Susunya kerasa premium, teksturnya juara!"
             </p>
-            <!-- @endif -->
+                      </div>
+          
           </div>
-          <!-- @endforeach -->
-
-          </div>
-        <!-- @endif -->
-
+        
       </div>
     </section>
-    <!-- @endsection -->
-  </main>
+      </main>
 
-  <!-- @section('footer') -->
-  <!-- Footer -->
+    <!-- Footer -->
   <footer id="kontak" class="bg-brand-chocolate text-brand-cream pt-20 pb-10 border-t-8 border-brand-gold relative overflow-hidden" data-aos="fade-up" data-aos-duration="1000">
     <!-- Abstract background -->
     <div class="absolute inset-0 opacity-5 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
@@ -390,16 +337,14 @@
         
         <!-- Brand Info -->
         <div class="md:col-span-5 lg:col-span-4">
-          <!-- @if($footer_logo_or_name) -->
-          <a href="#" class="inline-flex items-center gap-3 mb-6">
+                    <a href="#" class="inline-flex items-center gap-3 mb-6">
             <img src="{{ asset('assets/img/logo.png') }}" alt="Mbok Dewor" class="h-14 w-auto brightness-0 invert opacity-90">
             <div class="flex flex-col">
               <span class="text-xl font-bold tracking-tight text-white leading-none">Mbok Dewor</span>
               <span class="text-[9px] uppercase tracking-widest text-brand-gold font-bold">Premium Dessert</span>
             </div>
           </a>
-          <!-- @endif -->
-          <p class="text-brand-creamDark/60 text-sm leading-relaxed mb-8 font-light pr-4">
+                    <p class="text-brand-creamDark/60 text-sm leading-relaxed mb-8 font-light pr-4">
             Menghadirkan kreasi dessert premium dengan bahan organik pilihan untuk menyempurnakan setiap momen bahagia Anda.
           </p>
         </div>
@@ -408,21 +353,18 @@
         <div class="md:col-span-3 lg:col-span-4 lg:pl-12">
           <h3 class="font-bold text-sm text-white uppercase tracking-widest mb-6">Tautan Cepat</h3>
           <ul class="space-y-4">
-            <!-- @foreach($nav_links as $link) -->
-            <li><a href="#beranda" class="text-brand-creamDark/60 hover:text-brand-gold transition-colors text-sm font-light flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span> Beranda</a></li>
+                        <li><a href="#beranda" class="text-brand-creamDark/60 hover:text-brand-gold transition-colors text-sm font-light flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span> Beranda</a></li>
             <li><a href="#tentang" class="text-brand-creamDark/60 hover:text-brand-gold transition-colors text-sm font-light flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span> Tentang Kami</a></li>
             <li><a href="#menu" class="text-brand-creamDark/60 hover:text-brand-gold transition-colors text-sm font-light flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span> Menu & Harga</a></li>
             <li><a href="#testimoni" class="text-brand-creamDark/60 hover:text-brand-gold transition-colors text-sm font-light flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-brand-gold"></span> Ulasan</a></li>
-            <!-- @endforeach -->
-          </ul>
+                      </ul>
         </div>
         
         <!-- Contact -->
         <div class="md:col-span-4 lg:col-span-4">
           <h3 class="font-bold text-sm text-white uppercase tracking-widest mb-6">Hubungi Kami</h3>
           <ul class="space-y-5 text-sm font-light text-brand-creamDark/60">
-            <!-- @if($contact_whatsapp) -->
-            <li class="flex items-start gap-4">
+                        <li class="flex items-start gap-4">
               <div class="w-8 h-8 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0">
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M1.026 22l1.639-5.986a10.945 10.945 0 01-1.488-5.545c0-6.046 4.922-10.969 10.971-10.969 2.932 0 5.688 1.142 7.761 3.216 2.074 2.073 3.217 4.829 3.217 7.761 0 6.047-4.922 10.969-10.97 10.969a10.943 10.943 0 01-5.261-1.34L1.026 22zm6.208-3.415l.394.234a9.141 9.141 0 004.53 1.2c5.05 0 9.167-4.116 9.167-9.168 0-2.449-.954-4.752-2.686-6.484A9.124 9.124 0 0012.158 1.68c-5.051 0-9.168 4.116-9.168 9.168 0 1.636.425 3.211 1.233 4.606l.257.444-1.076 3.93 4.025-1.058h-.001-.002z"/><path d="M16.92 13.911c-.244-.122-1.442-.712-1.666-.793-.224-.081-.387-.122-.55.122-.163.244-.63.793-.772.955-.142.163-.284.183-.528.061-.244-.122-1.028-.379-1.958-1.206-.723-.643-1.21-1.439-1.353-1.683-.142-.244-.015-.377.107-.499.111-.11.244-.285.366-.427.122-.142.163-.244.244-.407.081-.163.041-.305-.02-.427-.061-.122-.55-1.325-.753-1.815-.198-.477-.4-.412-.55-.419-.142-.007-.305-.007-.468-.007-.163 0-.427.061-.651.305-.224.244-.855.834-.855 2.035 0 1.201.875 2.363.997 2.525.122.163 1.721 2.628 4.168 3.684.582.253 1.037.404 1.393.517.585.186 1.117.159 1.536.096.47-.07 1.442-.589 1.646-1.16.204-.57.204-1.058.143-1.16-.062-.102-.225-.163-.469-.285z"/></svg>
               </div>
@@ -431,10 +373,8 @@
                 <a href="https://wa.me/62{{ ltrim($settings['whatsapp_number'] ?? '081335374099', '0') }}" target="_blank" class="hover:text-brand-gold transition-colors text-white font-medium">{{ $settings['whatsapp_number'] ?? '0813 3537 4099' }}</a>
               </div>
             </li>
-            <!-- @endif -->
-            
-            <!-- @if($contact_instagram) -->
-            <li class="flex items-start gap-4">
+                        
+                        <li class="flex items-start gap-4">
               <div class="w-8 h-8 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0">
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
               </div>
@@ -443,10 +383,8 @@
                 <a href="#" class="hover:text-brand-gold transition-colors text-white font-medium">@mbokdeworpuding</a>
               </div>
             </li>
-            <!-- @endif -->
-            
-            <!-- @if($contact_address) -->
-            <li class="flex items-start gap-4">
+                        
+                        <li class="flex items-start gap-4">
               <div class="w-8 h-8 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center shrink-0 mt-1">
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
               </div>
@@ -455,8 +393,7 @@
                 <span class="text-white font-medium leading-relaxed">Surabaya, Jawa Timur, Indonesia</span>
               </div>
             </li>
-            <!-- @endif -->
-          </ul>
+                      </ul>
         </div>
         
       </div>
@@ -467,8 +404,7 @@
       </div>
     </div>
   </footer>
-  <!-- @endsection -->
-
+  
   <!-- Floating WhatsApp Action Button (Pulse) -->
   <a href="https://wa.me/62{{ ltrim($settings['whatsapp_number'] ?? '081335374099', '0') }}" 
      target="_blank"
