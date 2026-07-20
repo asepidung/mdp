@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class SiteSettingResource extends Resource
 {
@@ -20,6 +21,12 @@ class SiteSettingResource extends Resource
     protected static ?string $modelLabel = 'Pengaturan';
     protected static ?string $pluralModelLabel = 'Profil & Info Toko';
     protected static ?string $slug = 'info-toko';
+
+    
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->orderByRaw("FIELD(key, 'hero_image', 'hero_title', 'hero_description', 'hero_badge', 'about_title', 'about_text', 'whatsapp_number', 'instagram_url', 'google_maps_url', 'address')");
+    }
 
     public static function canCreate(): bool
     {
@@ -82,7 +89,8 @@ class SiteSettingResource extends Resource
             ])
             ->bulkActions([
                 // Removed delete bulk action
-            ]);
+            ])
+            ->paginated(false);
     }
 
     public static function getRelations(): array
