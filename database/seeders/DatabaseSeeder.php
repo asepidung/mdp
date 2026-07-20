@@ -23,6 +23,14 @@ class DatabaseSeeder extends Seeder
                 'password' => bcrypt('91142552'),
             ]);
         }
+        
+        if (!User::where('username', 'kikis')->exists()) {
+            User::factory()->create([
+                'name' => 'Kikis',
+                'username' => 'kikis',
+                'password' => bcrypt('pudingdewor'),
+            ]);
+        }
 
         // Seed Default Settings
                 $settings = [
