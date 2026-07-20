@@ -399,7 +399,7 @@
       </div>
       
       <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-[11px] text-brand-creamDark/40">
-        <p>&copy; 2026 Mbok Dewor Puding. Hak cipta dilindungi. <span class="mx-1 hidden md:inline">|</span> <span class="block md:inline mt-1 md:mt-0">Dibuat oleh <a href="https://instagram.com/asep_idung" target="_blank" class="text-brand-gold hover:text-white transition-colors font-semibold">Asep Idung</a></span></p>
+        <p>&copy; 2026 Mbok Dewor Puding. Hak cipta dilindungi. <span class="mx-1 hidden md:inline">|</span> <span class="block md:inline mt-1 md:mt-0">The artisan <a href="https://instagram.com/asep_idung" target="_blank" class="text-brand-gold hover:text-white transition-colors font-semibold">saepullrock</a></span></p>
         <p class="mt-3 md:mt-0">Dirancang secara artisan untuk rasa yang tak terlupakan.</p>
       </div>
     </div>
