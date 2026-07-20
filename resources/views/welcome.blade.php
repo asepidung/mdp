@@ -148,8 +148,8 @@
             </h1>
             
                         <p class="text-sm sm:text-base md:text-lg text-brand-chocolateLight max-w-xl mb-10 leading-relaxed font-light">
-              Sensasi dessert lumer berkelas dunia yang dibuat secara higienis menggunakan susu segar murni dan bahan organik premium. Tekstur selembut sutra yang siap memanjakan setiap suapan.
-            </p>
+                {{ $settings['hero_description'] ?? 'Sensasi dessert lumer berkelas dunia yang dibuat secara higienis menggunakan susu segar murni dan bahan organik premium. Tekstur selembut sutra yang siap memanjakan setiap suapan.' }}
+              </p>
             
             <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                             <a href="https://wa.me/62{{ ltrim($settings['whatsapp_number'] ?? '081335374099', '0') }}" 
@@ -181,7 +181,7 @@
               <!-- Premium Badge Floating -->
               <div class="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg border border-white flex items-center gap-2 animate-bounce">
                 <span class="text-brand-gold text-lg">⭐</span>
-                <span class="text-[10px] font-bold text-brand-chocolate tracking-wider uppercase">Premium Quality</span>
+                <span class="text-[10px] font-bold text-brand-chocolate tracking-wider uppercase">{{ $settings['hero_badge'] ?? 'Premium Quality' }}</span>
               </div>
             </div>
           </div>
@@ -219,7 +219,7 @@
           <div data-aos="fade-left" data-aos-duration="1000">
             <span class="text-xs font-bold text-brand-gold uppercase tracking-widest block mb-3">Filosofi Rasa</span>
                         <h2 class="text-3xl md:text-4xl font-black text-brand-chocolate leading-tight mb-6">
-              Dibuat dengan Bahan Susu Premium Pilihan & Penuh Kasih Sayang
+              {{ $settings['about_title'] ?? 'Dibuat dengan Bahan Susu Premium Pilihan & Penuh Kasih Sayang' }}
             </h2>
                         
             <div class="space-y-4 text-sm sm:text-base text-brand-chocolateLight leading-relaxed mb-10 font-light">
@@ -380,7 +380,7 @@
               </div>
               <div class="flex flex-col">
                 <span class="text-[10px] uppercase tracking-wider text-brand-creamDark/40 font-bold mb-0.5">Instagram</span>
-                <a href="#" class="hover:text-brand-gold transition-colors text-white font-medium">@mbokdeworpuding</a>
+                <a href="{{ $settings['instagram_url'] ?? '#' }}" target="_blank" class="hover:text-brand-gold transition-colors text-white font-medium">@mbokdeworpuding</a>
               </div>
             </li>
                         
@@ -390,7 +390,7 @@
               </div>
               <div class="flex flex-col">
                 <span class="text-[10px] uppercase tracking-wider text-brand-creamDark/40 font-bold mb-0.5">Workshop</span>
-                <span class="text-white font-medium leading-relaxed">Surabaya, Jawa Timur, Indonesia</span>
+                <a href="{{ $settings['google_maps_url'] ?? '#' }}" target="_blank" class="text-white font-medium leading-relaxed hover:text-brand-gold transition-colors">{{ $settings['address'] ?? 'Surabaya, Jawa Timur, Indonesia' }}</a>
               </div>
             </li>
                       </ul>

@@ -55,14 +55,20 @@ class SiteSettingResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('key')
                     ->label('Bagian')
-                    ->formatStateUsing(function ($state) {
-                        return match($state) {
-                            'whatsapp_number' => 'Nomor WhatsApp',
-                            'hero_title' => 'Judul Web (Utama)',
-                            'about_text' => 'Teks Tentang Kami',
-                            default => $state,
-                        };
-                    }),
+                                          ->formatStateUsing(function ($state) {
+                          return match($state) {
+                              'whatsapp_number' => 'Nomor WhatsApp',
+                              'hero_title' => 'Judul Utama (Hero)',
+                              'hero_description' => 'Deskripsi Utama (Hero)',
+                              'hero_badge' => 'Teks Badge (Hero)',
+                              'about_title' => 'Judul Tentang Kami',
+                              'about_text' => 'Teks Tentang Kami',
+                              'instagram_url' => 'Link Instagram',
+                              'google_maps_url' => 'Link Google Maps',
+                              'address' => 'Alamat Lengkap',
+                              default => $state,
+                          };
+                      }),
                 Tables\Columns\TextColumn::make('value')
                     ->label('Isi (Preview)')
                     ->limit(60),
