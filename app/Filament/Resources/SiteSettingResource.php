@@ -25,7 +25,7 @@ class SiteSettingResource extends Resource
     
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->orderByRaw("FIELD(key, 'hero_image', 'hero_title', 'hero_description', 'hero_badge', 'about_title', 'about_text', 'whatsapp_number', 'instagram_url', 'google_maps_url', 'address')");
+        return parent::getEloquentQuery()->orderByRaw("FIELD(`key`, 'hero_image', 'hero_title', 'hero_description', 'hero_badge', 'about_title', 'about_text', 'whatsapp_number', 'instagram_url', 'google_maps_url', 'address')");
     }
 
     public static function canCreate(): bool
