@@ -178,10 +178,6 @@
               
                               @if(!empty($settings['hero_image']))
                   <img src="{{ Storage::url($settings['hero_image']) }}" alt="Puding Mewah Mbok Dewor" class="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-4 border-white transition-transform duration-700 hover:scale-[1.02]">
-                @else
-                  <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-4 border-white transition-transform duration-700 hover:scale-[1.02]">
-                    <source src="{{ asset('assets/videos/video.mp4') }}" type="video/mp4">
-                  </video>
                 @endif
                             
               <!-- Premium Badge Floating -->
