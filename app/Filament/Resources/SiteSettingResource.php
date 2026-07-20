@@ -43,16 +43,29 @@ class SiteSettingResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Section::make('Ubah Informasi')
-                    ->schema([
-                        Forms\Components\TextInput::make('key')
-                            ->label('Jenis Pengaturan')
-                            ->disabled() // So they can't change the key
-                            ->required(),
-                        Forms\Components\Textarea::make('value')
-                            ->label('Isi (Nilai)')
-                            ->required()
-                            ->rows(5),
-                    ])->columns(1),
+                    ->schema(function (?\App\Models\SiteSetting $record) {
+                        $fields = [
+                            Forms\Components\TextInput::make('key')
+                                ->label('Jenis Pengaturan')
+                                ->disabled()
+                                ->required(),
+                        ];
+
+                        if ($record && $record->key === 'hero_image') {
+                            $fields[] = Forms\Components\FileUpload::make('value')
+                                ->label('Upload Gambar')
+                                ->image()
+                                ->directory('site-settings')
+                                ->required();
+                        } else {
+                            $fields[] = Forms\Components\Textarea::make('value')
+                                ->label('Isi (Nilai)')
+                                ->required()
+                                ->rows(5);
+                        }
+
+                        return $fields;
+                    })->columns(1),
             ]);
     }
 
