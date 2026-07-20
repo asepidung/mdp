@@ -17,6 +17,16 @@ class EditSiteSetting extends EditRecord
         ];
     }
 
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        if (isset($data['hero_image_value'])) {
+            $data['value'] = $data['hero_image_value'];
+            unset($data['hero_image_value']);
+        }
+        return $data;
+    }
+
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');
