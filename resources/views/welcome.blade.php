@@ -176,7 +176,7 @@
               <!-- Gold solid backup card -->
               <div class="absolute inset-2 bg-gradient-to-tr from-brand-gold/30 to-amber-200/40 rounded-[2.5rem] rotate-3 shadow-lg transition-transform duration-700 hover:rotate-0"></div>
               
-                            <img src="{{ asset('assets/img/puding-1.jpg') }}') }}" alt="Puding Mewah Mbok Dewor" class="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-4 border-white transition-transform duration-700 hover:scale-[1.02]">
+                            <img src="{{ !empty($settings['hero_image']) ? Storage::url($settings['hero_image']) : asset('assets/img/puding-1.jpg') }}" alt="Puding Mewah Mbok Dewor" class="absolute inset-0 w-full h-full object-cover rounded-[2.5rem] shadow-2xl border-4 border-white transition-transform duration-700 hover:scale-[1.02]">
                             
               <!-- Premium Badge Floating -->
               <div class="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg border border-white flex items-center gap-2 animate-bounce">

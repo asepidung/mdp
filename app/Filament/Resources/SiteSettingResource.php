@@ -59,6 +59,7 @@ class SiteSettingResource extends Resource
                           return match($state) {
                               'whatsapp_number' => 'Nomor WhatsApp',
                               'hero_title' => 'Judul Utama (Hero)',
+                                'hero_image' => 'Gambar Utama (Hero)',
                               'hero_description' => 'Deskripsi Utama (Hero)',
                               'hero_badge' => 'Teks Badge (Hero)',
                               'about_title' => 'Judul Tentang Kami',

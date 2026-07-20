@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
                 $settings = [
             ['key' => 'whatsapp_number', 'value' => '081335374099'],
             ['key' => 'hero_title', 'value' => 'Rasakan Kelezatan Puding Asli Mbok Dewor'],
+            ['key' => 'hero_image', 'value' => ''],
             ['key' => 'hero_description', 'value' => 'Sensasi dessert lumer berkelas dunia yang dibuat secara higienis menggunakan susu segar murni dan bahan organik premium. Tekstur selembut sutra yang siap memanjakan setiap suapan.'],
             ['key' => 'hero_badge', 'value' => 'Premium Quality'],
             ['key' => 'about_title', 'value' => 'Dibuat dengan Bahan Susu Premium Pilihan & Penuh Kasih Sayang'],
