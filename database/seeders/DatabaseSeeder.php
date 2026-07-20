@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
 
         // Seed Default Settings
                 $settings = [
+            ['key' => 'meta_title', 'value' => 'Mbok Dewor Puding - Premium F&B Dessert'],
+            ['key' => 'meta_description', 'value' => 'Sensasi dessert lumer berkelas dunia yang dibuat secara higienis menggunakan susu segar murni dan bahan organik premium.'],
             ['key' => 'whatsapp_number', 'value' => '081335374099'],
             ['key' => 'hero_title', 'value' => 'Rasakan Kelezatan Puding Asli Mbok Dewor'],
             ['key' => 'hero_image', 'value' => ''],

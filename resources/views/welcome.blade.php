@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mbok Dewor Puding - Premium F&B Dessert</title>
-  <meta name="description" content="Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor. Puding premium susu asli dengan kualitas rasa premium & kemasan elegan.">
+  <title>{{ $settings['meta_title'] ?? 'Mbok Dewor Puding - Premium F&B Dessert' }}</title>
+  <meta name="description" content="{{ $settings['meta_description'] ?? 'Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor. Puding premium susu asli dengan kualitas rasa premium & kemasan elegan.' }}">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
