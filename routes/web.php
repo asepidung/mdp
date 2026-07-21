@@ -14,3 +14,22 @@ Route::get('/', function () {
 
     return view('welcome', compact('products', 'testimonials', 'settings'));
 });
+
+Route::get('/fix-hosting', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('optimize:clear');
+        $storagePath = public_path('storage');
+        
+        if (is_link($storagePath)) {
+            unlink($storagePath);
+        }
+        
+        if (!file_exists($storagePath)) {
+            mkdir($storagePath, 0775, true);
+        }
+        
+        return 'Hosting cache cleared and storage folder fixed! Silakan coba upload gambar lagi.';
+    } catch (\Exception $e) {
+        return 'Error: ' . $e->getMessage();
+    }
+});
