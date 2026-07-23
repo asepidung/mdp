@@ -35,7 +35,7 @@
                     <label class="block text-sm font-bold text-[#1F1109] mb-2">Nama Anda</label>
                     <input type="text" name="customer_name" required 
                         class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#D97706] focus:border-transparent outline-none transition-all"
-                        placeholder="Contoh: Asep Idung" value="{{ old('customer_name') }}">
+                        placeholder="Contoh: Pelanggan Setia" value="{{ old('customer_name') }}">
                     @error('customer_name') <span class="text-red-500 text-xs mt-1 block">{{ $message }}</span> @enderror
                 </div>
 
