@@ -10,12 +10,10 @@
                 </x-filament::button>
 
                 @if($generatedLink)
-                <div class="mt-6 p-4 bg-gray-100 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-4 dark:bg-gray-800 w-full overflow-hidden box-border">
-                    <div class="flex-1 min-w-0">
-                        <code class="text-xs sm:text-sm text-gray-800 break-all dark:text-gray-200 block">{{ $generatedLink }}</code>
-                    </div>
+                <div class="mt-6 flex flex-col sm:flex-row gap-3 w-full">
+                    <input type="text" readonly value="{{ $generatedLink }}" class="w-full flex-1 rounded-lg border-gray-300 bg-gray-100 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-700 dark:bg-gray-800 dark:text-white" />
                     
-                    <div class="shrink-0 w-full sm:w-auto">
+                    <div class="shrink-0">
                         <x-filament::button
                             color="success"
                             icon="heroicon-m-clipboard-document"
