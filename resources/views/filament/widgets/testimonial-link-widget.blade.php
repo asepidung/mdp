@@ -10,19 +10,22 @@
                 </x-filament::button>
 
                 @if($generatedLink)
-                <div class="mt-6 p-4 bg-gray-100 rounded-lg flex items-center justify-between gap-4 dark:bg-gray-800">
-                    <code class="text-sm text-gray-800 break-all dark:text-gray-200">{{ $generatedLink }}</code>
+                <div class="mt-6 p-4 bg-gray-100 rounded-lg flex flex-col sm:flex-row sm:items-center justify-between gap-4 dark:bg-gray-800">
+                    <code class="text-xs sm:text-sm text-gray-800 break-all dark:text-gray-200">{{ $generatedLink }}</code>
                     
-                    <x-filament::button
-                        color="success"
-                        icon="heroicon-m-clipboard-document"
-                        x-on:click="
-                            navigator.clipboard.writeText('{{ $generatedLink }}')
-                            $tooltip('Link disalin!', { timeout: 1500 })
-                        "
-                    >
-                        Salin
-                    </x-filament::button>
+                    <div class="shrink-0 w-full sm:w-auto">
+                        <x-filament::button
+                            color="success"
+                            icon="heroicon-m-clipboard-document"
+                            class="w-full sm:w-auto justify-center"
+                            x-on:click="
+                                navigator.clipboard.writeText('{{ $generatedLink }}')
+                                $tooltip('Link disalin!', { timeout: 1500 })
+                            "
+                        >
+                            Salin
+                        </x-filament::button>
+                    </div>
                 </div>
                 @endif
             </div>
