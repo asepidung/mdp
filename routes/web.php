@@ -33,3 +33,10 @@ Route::get('/fix-hosting', function () {
         return 'Error: ' . $e->getMessage();
     }
 });
+
+Route::get('/ulasan-sukses', function () {
+    return view('ulasan-success');
+})->name('ulasan.success');
+
+Route::get('/ulasan/{token}', [\App\Http\Controllers\TestimonialController::class, 'create'])->name('ulasan.create');
+Route::post('/ulasan/{token}', [\App\Http\Controllers\TestimonialController::class, 'store'])->name('ulasan.store');
