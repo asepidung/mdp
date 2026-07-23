@@ -303,25 +303,31 @@
                 <!-- Clean CSS Grid for CMS robust display (replacing complex slider) -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           
-                              <div class="relative overflow-hidden bg-white border border-brand-creamDark/80 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group" data-aos="fade-up" data-aos-delay="100">
+          @forelse($testimonials as $testimonial)
+          <div class="relative overflow-hidden bg-white border border-brand-creamDark/80 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
             <div class="absolute right-6 top-6 text-brand-creamDark text-7xl font-serif select-none pointer-events-none opacity-50 z-10 group-hover:text-brand-gold/10 transition-colors">“</div>
             
             <div class="flex items-center gap-4 mb-6 relative z-20">
-              <div class="w-14 h-14 rounded-2xl bg-amber-50 border border-brand-creamDark flex items-center justify-center font-bold text-xl text-brand-gold shrink-0 shadow-inner">
-                AI
+              <div class="w-14 h-14 rounded-2xl bg-amber-50 border border-brand-creamDark flex items-center justify-center font-bold text-xl text-brand-gold shrink-0 shadow-inner uppercase">
+                {{ substr($testimonial->customer_name, 0, 2) }}
               </div>
               <div>
-                                <h4 class="font-bold text-base text-brand-chocolate leading-none">Asep idung</h4>
-                                <div class="flex gap-1 mt-2 text-brand-gold text-xs">
-                  <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                <h4 class="font-bold text-base text-brand-chocolate leading-none">{{ $testimonial->customer_name }}</h4>
+                <div class="flex gap-1 mt-2 text-brand-gold text-xs">
+                  @for($i = 0; $i < $testimonial->rating; $i++)
+                  <span>★</span>
+                  @endfor
                 </div>
               </div>
             </div>
 
-                        <p class="text-sm md:text-base text-brand-chocolateLight italic font-light leading-relaxed flex-grow line-clamp-4 relative z-20">
-              "Gila pudingnya beneran lumer di mulut! Pesen buat acara anniversary, istri saya seneng banget. Susunya kerasa premium, teksturnya juara!"
+            <p class="text-sm md:text-base text-brand-chocolateLight italic font-light leading-relaxed flex-grow line-clamp-4 relative z-20">
+              "{{ $testimonial->content }}"
             </p>
-                      </div>
+          </div>
+          @empty
+          <div class="col-span-full text-center text-brand-chocolateLight py-10">Belum ada ulasan pelanggan.</div>
+          @endforelse
           
           </div>
         
