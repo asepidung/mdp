@@ -283,8 +283,8 @@
       </div>
     </section>
     
-    <!-- Menu / Gallery Section (Bento Grid with Load More) -->
-    <section id="menu" x-data="{ showAllProducts: false }" class="py-20 md:py-28 relative">
+    <!-- Menu / Gallery Section (Bento Grid with Progressive Load More) -->
+    <section id="menu" x-data="{ visibleCount: 4, totalProducts: {{ count($products) }} }" class="py-20 md:py-28 relative">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
@@ -297,7 +297,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           @forelse($products as $index => $product)
-          <div x-show="showAllProducts || {{ $loop->index }} < 4"
+          <div x-show="{{ $loop->index }} < visibleCount"
                x-transition:enter="transition ease-out duration-300 transform"
                x-transition:enter-start="opacity-0 translate-y-4"
                x-transition:enter-end="opacity-100 translate-y-0"
@@ -327,10 +327,10 @@
         <!-- Load More Button Trigger -->
         <div class="mt-12 text-center" data-aos="fade-up">
           <button type="button" 
-                  @click="showAllProducts = !showAllProducts" 
+                  @click="visibleCount >= totalProducts ? visibleCount = 4 : visibleCount += 4" 
                   class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-chocolate hover:bg-brand-chocolateLight text-white font-bold text-sm shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-            <span x-text="showAllProducts ? 'Tampilkan Lebih Sedikit' : 'Lihat Menu Lainnya (+{{ count($products) - 4 }})'"></span>
-            <svg class="w-5 h-5 transform transition-transform duration-300" :class="showAllProducts ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <span x-text="visibleCount >= totalProducts ? 'Tampilkan Lebih Sedikit' : 'Lihat Menu Lainnya (+' + Math.min(4, totalProducts - visibleCount) + ')'"></span>
+            <svg class="w-5 h-5 transform transition-transform duration-300" :class="visibleCount >= totalProducts ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
