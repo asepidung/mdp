@@ -16,6 +16,9 @@
 
   <!-- AOS CSS for Scroll Animations -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -49,9 +52,39 @@
 
   <style>
     [x-cloak] { display: none !important; }
+    html, body, button, input, textarea, select, h1, h2, h3, h4, h5, h6, p, span, a, div {
+      font-family: 'Poppins', sans-serif !important;
+    }
   </style>
 </head>
-<body x-data="{ lightboxOpen: false, lightboxImage: '' }" class="bg-brand-cream text-brand-chocolate min-h-screen overflow-x-hidden antialiased">
+<body x-data="{ 
+        lightboxOpen: false, 
+        activeProductIndex: 0, 
+        productsList: {{ json_encode($products->map(function($p) {
+            return [
+                'id' => $p->id,
+                'name' => $p->name,
+                'description' => $p->description,
+                'image' => $p->image_path ? Storage::url($p->image_path) : asset('assets/img/puding-1.jpg')
+            ];
+        })->values()) }},
+        openLightbox(index) {
+            this.activeProductIndex = index;
+            this.lightboxOpen = true;
+        },
+        nextProduct() {
+            if (!this.productsList.length) return;
+            this.activeProductIndex = (this.activeProductIndex + 1) % this.productsList.length;
+        },
+        prevProduct() {
+            if (!this.productsList.length) return;
+            this.activeProductIndex = (this.activeProductIndex - 1 + this.productsList.length) % this.productsList.length;
+        }
+      }"
+      @keydown.arrow-right.window="if(lightboxOpen) nextProduct()"
+      @keydown.arrow-left.window="if(lightboxOpen) prevProduct()"
+      @keydown.escape.window="lightboxOpen = false"
+      class="bg-brand-cream text-brand-chocolate min-h-screen overflow-x-hidden antialiased font-sans">
 
     <!-- Header / Navbar (Alpine.js State) -->
   <header x-data="{ mobileMenuOpen: false, scrolled: false }" 
@@ -144,7 +177,7 @@
             </div>
 
                         <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight text-brand-chocolate leading-[1.15] mb-6">
-              {{ $settings['hero_title'] ?? 'Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor.' }}
+              {{ $settings['hero_title'] ?? 'Rasakan Kelezatan Puding Asli Mbok Dewor' }}
             </h1>
             
                         <p class="text-sm sm:text-base md:text-lg text-brand-chocolateLight max-w-xl mb-10 leading-relaxed font-light">
@@ -250,39 +283,59 @@
       </div>
     </section>
     
-        <!-- Menu / Gallery Section (Bento Grid) -->
-    <section id="menu" class="py-20 md:py-28 relative">
+    <!-- Menu / Gallery Section (Bento Grid with Load More) -->
+    <section id="menu" x-data="{ showAllProducts: false }" class="py-20 md:py-28 relative">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
           <span class="text-xs font-bold text-brand-gold uppercase tracking-widest block mb-3">Signature Menu</span>
-                    <h2 class="text-3xl md:text-4xl font-black text-brand-chocolate">Galeri Kreasi Puding</h2>
-                    <div class="w-16 h-1.5 bg-brand-gold mx-auto mt-6 rounded-full"></div>
+          <h2 class="text-3xl md:text-4xl font-black text-brand-chocolate">Galeri Kreasi Puding</h2>
+          <div class="w-16 h-1.5 bg-brand-gold mx-auto mt-6 rounded-full"></div>
         </div>
 
-        <!-- Modern Bento Grid with CMS Safeguards -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Modern Bento Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
-          @forelse($products as $product)
-          <div class="group bg-white rounded-[2rem] p-3 border border-brand-creamDark/50 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col h-full hover:-translate-y-2" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 50 }}">
-            <div class="overflow-hidden rounded-3xl w-full relative">
+          @forelse($products as $index => $product)
+          <div x-show="showAllProducts || {{ $loop->index }} < 4"
+               x-transition:enter="transition ease-out duration-300 transform"
+               x-transition:enter-start="opacity-0 translate-y-4"
+               x-transition:enter-end="opacity-100 translate-y-0"
+               class="group bg-white rounded-[2rem] p-3 border border-brand-creamDark/50 shadow-sm hover:shadow-2xl transition-all duration-500 flex flex-col h-full hover:-translate-y-2" 
+               data-aos="fade-up" 
+               data-aos-delay="{{ min($loop->iteration * 50, 400) }}">
+            <div class="overflow-hidden rounded-3xl w-full relative cursor-pointer" @click="openLightbox({{ $loop->index }})">
               <img src="{{ $product->image_path ? Storage::url($product->image_path) : asset('assets/img/puding-1.jpg') }}" alt="{{ $product->name }}" class="w-full aspect-square object-cover rounded-3xl transform group-hover:scale-110 transition-transform duration-700">
               <div class="absolute inset-0 bg-brand-chocolate/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                <button type="button" @click.prevent="lightboxOpen = true; lightboxImage = '{{ $product->image_path ? Storage::url($product->image_path) : asset('assets/img/puding-1.jpg') }}'" class="px-5 py-2.5 bg-brand-gold text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-brand-goldDark flex items-center gap-2">
-                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg> Perbesar
+                <button type="button" @click.prevent="openLightbox({{ $loop->index }})" class="px-5 py-2.5 bg-brand-gold text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 hover:bg-brand-goldDark flex items-center gap-2">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg> Detail Menu
                 </button>
               </div>
             </div>
             <div class="px-3 pt-5 pb-3 flex flex-col flex-grow text-center">
-              <h3 class="font-bold text-sm md:text-base text-brand-chocolate mb-1 line-clamp-2">{{ $product->name }}</h3>
+              <h3 class="font-bold text-sm md:text-base text-brand-chocolate mb-1 line-clamp-2 cursor-pointer hover:text-brand-gold transition-colors" @click="openLightbox({{ $loop->index }})">{{ $product->name }}</h3>
               <p class="text-[11px] md:text-xs text-brand-chocolateLight font-light line-clamp-3">{{ $product->description }}</p>
             </div>
           </div>
-@empty
+          @empty
           <div class="col-span-full text-center text-brand-chocolateLight py-10">Belum ada menu puding yang ditambahkan.</div>
-@endforelse
+          @endforelse
           
         </div>
+
+        @if(count($products) > 4)
+        <!-- Load More Button Trigger -->
+        <div class="mt-12 text-center" data-aos="fade-up">
+          <button type="button" 
+                  @click="showAllProducts = !showAllProducts" 
+                  class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-brand-chocolate hover:bg-brand-chocolateLight text-white font-bold text-sm shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <span x-text="showAllProducts ? 'Tampilkan Lebih Sedikit' : 'Lihat Menu Lainnya (+{{ count($products) - 4 }})'"></span>
+            <svg class="w-5 h-5 transform transition-transform duration-300" :class="showAllProducts ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </div>
+        @endif
         
       </div>
     </section>
@@ -300,36 +353,43 @@
                     <div class="w-16 h-1.5 bg-brand-gold mx-auto mt-6 rounded-full"></div>
         </div>
 
-                <!-- Clean CSS Grid for CMS robust display (replacing complex slider) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          
+        <!-- Swiper Carousel for Testimonials -->
+        <div class="swiper testimonial-swiper pb-16 px-2 md:px-12" data-aos="fade-up" data-aos-delay="100">
+          <div class="swiper-wrapper">
           @forelse($testimonials as $testimonial)
-          <div class="relative overflow-hidden bg-white border border-brand-creamDark/80 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
-            <div class="absolute right-6 top-6 text-brand-creamDark text-7xl font-serif select-none pointer-events-none opacity-50 z-10 group-hover:text-brand-gold/10 transition-colors">“</div>
-            
-            <div class="flex items-center gap-4 mb-6 relative z-20">
-              <div class="w-14 h-14 rounded-2xl bg-amber-50 border border-brand-creamDark flex items-center justify-center font-bold text-xl text-brand-gold shrink-0 shadow-inner uppercase">
-                {{ substr($testimonial->customer_name, 0, 2) }}
-              </div>
-              <div>
-                <h4 class="font-bold text-base text-brand-chocolate leading-none">{{ $testimonial->customer_name }}</h4>
-                <div class="flex gap-1 mt-2 text-brand-gold text-xs">
-                  @for($i = 0; $i < $testimonial->rating; $i++)
-                  <span>★</span>
-                  @endfor
+            <div class="swiper-slide h-auto">
+              <div class="relative overflow-hidden bg-white border border-brand-creamDark/80 rounded-3xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full group">
+                <div class="absolute right-6 top-6 text-brand-creamDark text-7xl font-serif select-none pointer-events-none opacity-50 z-10 group-hover:text-brand-gold/10 transition-colors">“</div>
+                
+                <div class="flex items-center gap-4 mb-6 relative z-20">
+                  <div class="w-14 h-14 rounded-2xl bg-amber-50 border border-brand-creamDark flex items-center justify-center font-bold text-xl text-brand-gold shrink-0 shadow-inner uppercase">
+                    {{ substr($testimonial->customer_name, 0, 2) }}
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-base text-brand-chocolate leading-none">{{ $testimonial->customer_name }}</h4>
+                    <div class="flex gap-1 mt-2 text-brand-gold text-xs">
+                      @for($i = 0; $i < $testimonial->rating; $i++)
+                      <span>★</span>
+                      @endfor
+                    </div>
+                  </div>
                 </div>
+
+                <p class="text-sm md:text-base text-brand-chocolateLight italic font-light leading-relaxed flex-grow line-clamp-4 relative z-20">
+                  "{{ $testimonial->content }}"
+                </p>
               </div>
             </div>
-
-            <p class="text-sm md:text-base text-brand-chocolateLight italic font-light leading-relaxed flex-grow line-clamp-4 relative z-20">
-              "{{ $testimonial->content }}"
-            </p>
-          </div>
           @empty
-          <div class="col-span-full text-center text-brand-chocolateLight py-10">Belum ada ulasan pelanggan.</div>
+            <div class="w-full text-center text-brand-chocolateLight py-10">Belum ada ulasan pelanggan.</div>
           @endforelse
-          
           </div>
+          
+          <!-- Swiper Navigation & Pagination -->
+          <div class="swiper-pagination !bottom-0"></div>
+          <div class="swiper-button-prev !text-brand-gold !w-10 !h-10 bg-white rounded-full shadow-md border border-brand-creamDark after:!text-sm hidden md:flex items-center justify-center !left-0"></div>
+          <div class="swiper-button-next !text-brand-gold !w-10 !h-10 bg-white rounded-full shadow-md border border-brand-creamDark after:!text-sm hidden md:flex items-center justify-center !right-0"></div>
+        </div>
         
       </div>
     </section>
@@ -432,11 +492,44 @@
     });
   </script>
 
-  <!-- Alpine Lightbox Modal -->
-  <div @keydown.escape.window="lightboxOpen = false"
-       x-show="lightboxOpen"
+  <!-- Swiper JS & Initialization -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const swiper = new Swiper('.testimonial-swiper', {
+        slidesPerView: 1,
+        spaceBetween: 24,
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+          dynamicBullets: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 24,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 32,
+          }
+        }
+      });
+    });
+  </script>
+
+  <!-- Alpine Lightbox Modal with Full Details & Slider -->
+  <div x-show="lightboxOpen"
        x-cloak
-       class="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm"
+       class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-md"
        x-transition:enter="transition ease-out duration-300"
        x-transition:enter-start="opacity-0"
        x-transition:enter-end="opacity-100"
@@ -444,22 +537,76 @@
        x-transition:leave-start="opacity-100"
        x-transition:leave-end="opacity-0">
     
-    <!-- Close Button -->
-    <button type="button" @click.prevent="lightboxOpen = false" class="absolute top-6 right-6 text-white hover:text-brand-gold transition-colors p-2 focus:outline-none">
-      <svg class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-    </button>
-    
-    <!-- Image with Zoom Animation -->
-    <img :src="lightboxImage" alt="Zoomed Puding" 
-         @click.away="lightboxOpen = false"
-         x-show="lightboxOpen"
-         x-transition:enter="transition ease-out duration-300 transform delay-75"
-         x-transition:enter-start="scale-90 opacity-0"
-         x-transition:enter-end="scale-100 opacity-100"
-         x-transition:leave="transition ease-in duration-200 transform"
-         x-transition:leave-start="scale-100 opacity-100"
-         x-transition:leave-end="scale-95 opacity-0"
-         class="max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl border-2 border-white/10" />
+    <!-- Modal Card Container -->
+    <div @click.away="lightboxOpen = false"
+         class="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh] border border-brand-creamDark/50">
+      
+      <!-- Close Button -->
+      <button type="button" 
+              @click.prevent="lightboxOpen = false" 
+              class="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-black/40 hover:bg-black/70 text-white flex items-center justify-center transition-colors focus:outline-none backdrop-blur-sm">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <!-- Prev / Next Navigation Arrows -->
+      <template x-if="productsList.length > 1">
+        <div>
+          <button type="button" 
+                  @click.stop="prevProduct()" 
+                  class="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-white/90 hover:bg-white text-brand-chocolate hover:text-brand-gold shadow-lg flex items-center justify-center transition-all focus:outline-none border border-brand-creamDark"
+                  title="Sebelumnya (Panah Kiri)">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+
+          <button type="button" 
+                  @click.stop="nextProduct()" 
+                  class="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-11 h-11 rounded-full bg-white/90 hover:bg-white text-brand-chocolate hover:text-brand-gold shadow-lg flex items-center justify-center transition-all focus:outline-none border border-brand-creamDark"
+                  title="Selanjutnya (Panah Kanan)">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </template>
+
+      <!-- Image Display Side -->
+      <div class="md:w-1/2 bg-brand-creamDark/30 flex items-center justify-center p-6 relative min-h-[260px] md:min-h-[420px] overflow-hidden">
+        <template x-if="productsList[activeProductIndex]">
+          <img :src="productsList[activeProductIndex].image" 
+               :alt="productsList[activeProductIndex].name"
+               class="max-h-[350px] md:max-h-[420px] w-auto max-w-full object-contain rounded-2xl shadow-md transition-all duration-300" />
+        </template>
+        
+        <!-- Counter Badge -->
+        <template x-if="productsList.length > 0">
+          <div class="absolute bottom-4 left-4 bg-brand-chocolate/70 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm">
+            <span x-text="activeProductIndex + 1"></span> / <span x-text="productsList.length"></span>
+          </div>
+        </template>
+      </div>
+
+      <!-- Detail Info Side -->
+      <div class="md:w-1/2 p-6 md:p-8 flex flex-col justify-between overflow-y-auto bg-white">
+        <div>
+          <span class="text-xs font-extrabold text-brand-gold uppercase tracking-widest block mb-2">Detail Menu Puding</span>
+          <h3 x-text="productsList[activeProductIndex]?.name" class="text-2xl md:text-3xl font-black text-brand-chocolate mb-4 leading-tight"></h3>
+          
+          <div class="w-12 h-1 bg-brand-gold rounded-full mb-6"></div>
+
+          <div class="text-brand-chocolateLight text-sm md:text-base leading-relaxed space-y-3 font-light mb-8 whitespace-pre-line">
+            <p x-text="productsList[activeProductIndex]?.description"></p>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-brand-creamDark">
+          <a :href="'https://wa.me/62{{ ltrim($settings['whatsapp_number'] ?? '081335374099', '0') }}?text=Halo%20Mbok%20Dewor,%20saya%20tertarik%20dengan%20menu%20' + encodeURIComponent(productsList[activeProductIndex]?.name || '')" 
+             target="_blank" 
+             class="flex items-center justify-center w-full py-3.5 rounded-full bg-brand-gold hover:bg-brand-goldDark text-white font-bold shadow-lg transition-all gap-2 text-sm">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            <span>Pesan Menu Ini via WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
   </div>
 
 </body>

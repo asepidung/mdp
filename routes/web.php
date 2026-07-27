@@ -7,7 +7,7 @@ use App\Models\SiteSetting;
 
 Route::get('/', function () {
     $products = Product::where('is_active', true)->get();
-    $testimonials = Testimonial::where('is_active', true)->get();
+    $testimonials = Testimonial::where('is_active', true)->latest()->get();
     
     // Fetch Site Settings
     $settings = SiteSetting::pluck('value', 'key');
