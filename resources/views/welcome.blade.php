@@ -6,6 +6,14 @@
   <title>{{ $settings['meta_title'] ?? 'Mbok Dewor Puding - Premium F&B Dessert' }}</title>
   <meta name="description" content="{{ $settings['meta_description'] ?? 'Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor. Puding premium susu asli dengan kualitas rasa premium & kemasan elegan.' }}">
 
+  <!-- Technical & Keyword SEO Meta Tags -->
+  <meta name="keywords" content="mbok dewor puding, puding premium, puding susu murni, dessert artisan, hampers puding, puding ulang tahun, puding hantaran, puding loyang, puding cup, dessert lumer, kuliner puding">
+  <meta name="author" content="Mbok Dewor Puding">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="{{ url()->current() }}">
+  <meta name="geo.region" content="ID">
+  <meta name="geo.placename" content="Indonesia">
+
   <!-- Open Graph / WhatsApp / Facebook Sharing SEO Meta Tags -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="{{ url()->current() }}">
@@ -18,6 +26,34 @@
   <meta name="twitter:title" content="{{ $settings['meta_title'] ?? 'Mbok Dewor Puding - Premium F&B Dessert' }}">
   <meta name="twitter:description" content="{{ $settings['meta_description'] ?? 'Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor. Puding premium susu asli dengan kualitas rasa premium & kemasan elegan.' }}">
   <meta name="twitter:image" content="{{ asset('assets/img/logo.png') }}">
+
+  <!-- Schema.org JSON-LD Structured Data for Google Rich Snippets & Business Profile -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Bakery",
+    "name": "Mbok Dewor Puding",
+    "image": "{{ asset('assets/img/logo.png') }}",
+    "@id": "{{ url('/') }}",
+    "url": "{{ url('/') }}",
+    "telephone": "+62{{ ltrim($settings['whatsapp_number'] ?? '081335374099', '0') }}",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ $settings['address'] ?? 'Indonesia' }}",
+      "addressCountry": "ID"
+    },
+    "description": "{{ $settings['meta_description'] ?? 'Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor.' }}",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+      ],
+      "opens": "08:00",
+      "closes": "21:00"
+    }
+  }
+  </script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
