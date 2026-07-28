@@ -26,6 +26,22 @@ class ProductResource extends Resource
             ->schema([
                 Forms\Components\Section::make('Informasi Produk')
                     ->schema([
+                        Forms\Components\Select::make('category_id')
+                            ->label('Kategori Produk')
+                            ->relationship('category', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->nullable()
+                            ->createOptionForm([
+                                Forms\Components\TextInput::make('name')
+                                    ->label('Nama Kategori')
+                                    ->required()
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => $set('slug', \Illuminate\Support\Str::slug($state))),
+                                Forms\Components\TextInput::make('slug')
+                                    ->label('Slug')
+                                    ->required(),
+                            ]),
                         Forms\Components\TextInput::make('name')
                             ->label('Nama Produk')
                             ->required()
@@ -58,6 +74,12 @@ class ProductResource extends Resource
                     ->label('Nama Produk')
                     ->searchable()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Kategori')
+                    ->badge()
+                    ->placeholder('Tanpa Kategori')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->label('Deskripsi')
                     ->limit(50)
@@ -78,7 +100,9 @@ class ProductResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('category_id')
+                    ->label('Kategori')
+                    ->relationship('category', 'name'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

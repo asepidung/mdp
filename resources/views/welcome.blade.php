@@ -63,6 +63,7 @@
         productsList: {{ json_encode($products->map(function($p) {
             return [
                 'id' => $p->id,
+                'category_id' => $p->category_id,
                 'name' => $p->name,
                 'description' => $p->description,
                 'image' => $p->image_path ? Storage::url($p->image_path) : asset('assets/img/puding-1.jpg')
@@ -261,19 +262,19 @@
                             {{ $settings['about_text'] ?? 'Setiap puding dari Mbok Dewor dibuat secara eksklusif (artisan).' }}
                           </div>
 
-            <!-- Occasions grid cards -->
-            <div class="grid grid-cols-3 gap-4">
-              <div class="p-4 bg-white/80 backdrop-blur rounded-2xl shadow-sm border border-brand-creamDark hover:shadow-md transition-shadow text-center group">
-                <span class="text-2xl block mb-2 transform group-hover:scale-125 transition-transform duration-300">🎂</span>
-                <span class="text-[10px] sm:text-xs font-bold text-brand-chocolate uppercase tracking-wide">Ulang Tahun</span>
+            <!-- Occasions grid cards (Mobile Optimized) -->
+            <div class="grid grid-cols-3 gap-2 sm:gap-4">
+              <div class="p-2.5 sm:p-4 bg-white/80 backdrop-blur rounded-2xl shadow-sm border border-brand-creamDark hover:shadow-md transition-shadow text-center group flex flex-col items-center justify-center min-w-0">
+                <span class="text-xl sm:text-2xl block mb-1.5 sm:mb-2 transform group-hover:scale-125 transition-transform duration-300">🎂</span>
+                <span class="text-[9px] sm:text-xs font-bold text-brand-chocolate uppercase tracking-tight sm:tracking-wide whitespace-nowrap overflow-hidden text-ellipsis w-full">Ulang Tahun</span>
               </div>
-              <div class="p-4 bg-white/80 backdrop-blur rounded-2xl shadow-sm border border-brand-creamDark hover:shadow-md transition-shadow text-center group">
-                <span class="text-2xl block mb-2 transform group-hover:scale-125 transition-transform duration-300">💝</span>
-                <span class="text-[10px] sm:text-xs font-bold text-brand-chocolate uppercase tracking-wide">Hantaran</span>
+              <div class="p-2.5 sm:p-4 bg-white/80 backdrop-blur rounded-2xl shadow-sm border border-brand-creamDark hover:shadow-md transition-shadow text-center group flex flex-col items-center justify-center min-w-0">
+                <span class="text-xl sm:text-2xl block mb-1.5 sm:mb-2 transform group-hover:scale-125 transition-transform duration-300">💝</span>
+                <span class="text-[9px] sm:text-xs font-bold text-brand-chocolate uppercase tracking-tight sm:tracking-wide whitespace-nowrap overflow-hidden text-ellipsis w-full">Hantaran</span>
               </div>
-              <div class="p-4 bg-white/80 backdrop-blur rounded-2xl shadow-sm border border-brand-creamDark hover:shadow-md transition-shadow text-center group">
-                <span class="text-2xl block mb-2 transform group-hover:scale-125 transition-transform duration-300">🎉</span>
-                <span class="text-[10px] sm:text-xs font-bold text-brand-chocolate uppercase tracking-wide">Perayaan</span>
+              <div class="p-2.5 sm:p-4 bg-white/80 backdrop-blur rounded-2xl shadow-sm border border-brand-creamDark hover:shadow-md transition-shadow text-center group flex flex-col items-center justify-center min-w-0">
+                <span class="text-xl sm:text-2xl block mb-1.5 sm:mb-2 transform group-hover:scale-125 transition-transform duration-300">🎉</span>
+                <span class="text-[9px] sm:text-xs font-bold text-brand-chocolate uppercase tracking-tight sm:tracking-wide whitespace-nowrap overflow-hidden text-ellipsis w-full">Perayaan</span>
               </div>
             </div>
 
@@ -283,21 +284,67 @@
       </div>
     </section>
     
-    <!-- Menu / Gallery Section (Bento Grid with Progressive Load More) -->
-    <section id="menu" x-data="{ visibleCount: 4, totalProducts: {{ count($products) }} }" class="py-20 md:py-28 relative">
+    <!-- Menu / Gallery Section (Bento Grid with Category Cards & Load More) -->
+    <section id="menu" x-data="{ selectedCategory: 'all', visibleCount: 4, totalProducts: {{ count($products) }} }" class="py-20 md:py-28 relative">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+        <div class="text-center max-w-2xl mx-auto mb-12" data-aos="fade-up">
           <span class="text-xs font-bold text-brand-gold uppercase tracking-widest block mb-3">Signature Menu</span>
           <h2 class="text-3xl md:text-4xl font-black text-brand-chocolate">Galeri Kreasi Puding</h2>
           <div class="w-16 h-1.5 bg-brand-gold mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        <!-- Visual Category Showcase Cards (Mobile Scrollable) -->
+        <div class="mb-12" data-aos="fade-up">
+          <div class="flex items-center justify-start md:justify-center gap-2.5 md:gap-4 overflow-x-auto pb-4 px-2 md:px-0 scrollbar-none no-scrollbar">
+            
+            <!-- All Products Card -->
+            <button type="button" 
+                    @click="selectedCategory = 'all'; visibleCount = 4"
+                    :class="selectedCategory === 'all' ? 'bg-brand-gold text-white shadow-lg shadow-brand-gold/30 scale-105 border-brand-gold' : 'bg-white text-brand-chocolate hover:bg-brand-creamDark border-brand-creamDark/80'"
+                    class="group shrink-0 px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl border transition-all duration-300 flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-bold shadow-sm">
+              <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-100 flex items-center justify-center text-brand-gold shrink-0 overflow-hidden">
+                <span class="text-sm sm:text-base">🍮</span>
+              </div>
+              <div class="flex flex-col text-left">
+                <span class="leading-none whitespace-nowrap">Semua Varian</span>
+                <span class="text-[9px] sm:text-[10px] font-normal opacity-80 mt-1 whitespace-nowrap">{{ count($products) }} Varian</span>
+              </div>
+            </button>
+
+            <!-- Dynamic Category Cards -->
+            @foreach($categories as $category)
+            @php
+              $coverImage = $category->image_path 
+                ? Storage::url($category->image_path) 
+                : ($category->products->first()?->image_path ? Storage::url($category->products->first()->image_path) : null);
+            @endphp
+            <button type="button" 
+                    @click="selectedCategory = {{ $category->id }}; visibleCount = 4"
+                    :class="selectedCategory === {{ $category->id }} ? 'bg-brand-gold text-white shadow-lg shadow-brand-gold/30 scale-105 border-brand-gold' : 'bg-white text-brand-chocolate hover:bg-brand-creamDark border-brand-creamDark/80'"
+                    class="group shrink-0 px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl border transition-all duration-300 flex items-center gap-2.5 sm:gap-3 text-xs sm:text-sm font-bold shadow-sm">
+              <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-100 flex items-center justify-center text-brand-gold shrink-0 overflow-hidden">
+                @if($coverImage)
+                  <img src="{{ $coverImage }}" alt="{{ $category->name }}" class="w-full h-full object-cover rounded-xl">
+                @else
+                  <span class="text-sm sm:text-base">✨</span>
+                @endif
+              </div>
+              <div class="flex flex-col text-left">
+                <span class="leading-none whitespace-nowrap">{{ $category->name }}</span>
+                <span class="text-[9px] sm:text-[10px] font-normal opacity-80 mt-1 whitespace-nowrap">{{ $category->products_count }} Varian</span>
+              </div>
+            </button>
+            @endforeach
+
+          </div>
         </div>
 
         <!-- Modern Bento Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           @forelse($products as $index => $product)
-          <div x-show="{{ $loop->index }} < visibleCount"
+          <div x-show="(selectedCategory === 'all' && {{ $loop->index }} < visibleCount) || (selectedCategory !== 'all' && '{{ $product->category_id }}' === String(selectedCategory))"
                x-transition:enter="transition ease-out duration-300 transform"
                x-transition:enter-start="opacity-0 translate-y-4"
                x-transition:enter-end="opacity-100 translate-y-0"
@@ -387,8 +434,12 @@
           
           <!-- Swiper Navigation & Pagination -->
           <div class="swiper-pagination !bottom-0"></div>
-          <div class="swiper-button-prev !text-brand-gold !w-10 !h-10 bg-white rounded-full shadow-md border border-brand-creamDark after:!text-sm hidden md:flex items-center justify-center !left-0"></div>
-          <div class="swiper-button-next !text-brand-gold !w-10 !h-10 bg-white rounded-full shadow-md border border-brand-creamDark after:!text-sm hidden md:flex items-center justify-center !right-0"></div>
+          <div class="swiper-button-prev !text-brand-gold hover:!text-brand-chocolate !w-auto !h-auto after:!content-none hidden md:flex items-center justify-center !left-0 font-black text-2xl select-none transition-transform hover:scale-125" title="Sebelumnya">
+            &lt;
+          </div>
+          <div class="swiper-button-next !text-brand-gold hover:!text-brand-chocolate !w-auto !h-auto after:!content-none hidden md:flex items-center justify-center !right-0 font-black text-2xl select-none transition-transform hover:scale-125" title="Selanjutnya">
+            &gt;
+          </div>
         </div>
         
       </div>
@@ -467,7 +518,7 @@
       </div>
       
       <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-[11px] text-brand-creamDark/40">
-        <p>&copy; 2026 Mbok Dewor Puding. Hak cipta dilindungi. <span class="mx-1 hidden md:inline">|</span> <span class="block md:inline mt-1 md:mt-0">The artisan <a href="https://instagram.com/asep_idung" target="_blank" class="text-brand-gold hover:text-white transition-colors font-semibold">saepullrock</a></span></p>
+        <p>&copy; 2026 Mbok Dewor Puding. Hak cipta dilindungi. <span class="mx-1 hidden md:inline">|</span> <span class="block md:inline mt-1 md:mt-0">The artisan <a href="https://instagram.com/asep_idung" target="_blank" class="text-brand-gold hover:text-white transition-colors font-semibold">saepullrock</a> Ver 1.2.1</span></p>
         <p class="mt-3 md:mt-0">Dirancang secara artisan untuk rasa yang tak terlupakan.</p>
       </div>
     </div>

@@ -2,17 +2,23 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Product;
+use App\Models\Category;
 use App\Models\Testimonial;
 use App\Models\SiteSetting;
 
 Route::get('/', function () {
-    $products = Product::where('is_active', true)->get();
+    $products = Product::where('is_active', true)->with('category')->get();
+    $categories = Category::where('is_active', true)
+        ->withCount(['products' => function ($query) {
+            $query->where('is_active', true);
+        }])
+        ->get();
     $testimonials = Testimonial::where('is_active', true)->latest()->get();
     
     // Fetch Site Settings
     $settings = SiteSetting::pluck('value', 'key');
 
-    return view('welcome', compact('products', 'testimonials', 'settings'));
+    return view('welcome', compact('products', 'categories', 'testimonials', 'settings'));
 });
 
 Route::get('/fix-hosting', function () {
