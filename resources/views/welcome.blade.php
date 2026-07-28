@@ -106,18 +106,21 @@
     }
   </style>
 </head>
+@php
+    $productsListData = $products->map(function($p) {
+        return [
+            'id' => $p->id,
+            'category_id' => $p->category_id,
+            'name' => $p->name,
+            'description' => $p->description,
+            'image' => $p->image_path ? Storage::url($p->image_path) : asset('assets/img/puding-1.jpg')
+        ];
+    })->values();
+@endphp
 <body x-data="{ 
         lightboxOpen: false, 
         activeProductIndex: 0, 
-        productsList: {{ json_encode($products->map(function($p) {
-            return [
-                'id' => $p->id,
-                'category_id' => $p->category_id,
-                'name' => $p->name,
-                'description' => $p->description,
-                'image' => $p->image_path ? Storage::url($p->image_path) : asset('assets/img/puding-1.jpg')
-            ];
-        })->values()) }},
+        productsList: {{ json_encode($productsListData) }},
         openLightbox(index) {
             this.activeProductIndex = index;
             this.lightboxOpen = true;
