@@ -20,7 +20,7 @@ Route::get('/fix-hosting', function () {
     } catch (\Exception $e) {
         return 'Error: ' . $e->getMessage();
     }
-});
+})->middleware('auth');
 
 Route::get('/ulasan-sukses', function () {
     return view('ulasan-success');

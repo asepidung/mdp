@@ -10,7 +10,7 @@ Berikut adalah temuan-temuannya:
 - **Masalah**: Endpoint `/fix-hosting` ini memanggil `\Illuminate\Support\Facades\Artisan::call('optimize:clear')` dan memanipulasi symlink pada folder `storage` tanpa perlindungan apapun (tanpa autentikasi atau *middleware*).
 - **Risiko**: Siapa saja yang mengetahui endpoint ini (atau *bot*) dapat memanggil URL ini berulang-ulang, yang akan membebani server dan dapat memicu *Denial of Service (DoS)* karena cache aplikasi terus dihapus dan dibentuk ulang.
 - **Rekomendasi Perbaikan**: Lindungi rute ini dengan middleware `auth` dan proteksi khusus (hanya admin yang dapat memanggil), pindahkan eksekusinya ke *button* di halaman admin panel Filament, atau gunakan command SSH saja alih-alih mengeksposnya di web publik.
-- **Tindakan yang Diambil:** ⏭️ **Dilewati (Skipped).** Sesuai alur aplikasi, endpoint ini sengaja dibuat dan diekspos agar mudah dijalankan via browser untuk *troubleshooting* di *shared hosting* yang tidak memiliki akses SSH.
+- **Tindakan yang Diambil:** ✅ **Diperbaiki.** Mengingat server telah dilengkapi fitur SSH (berdasarkan tangkapan layar dashboard Hostinger), kerentanan ini kini telah ditutup dengan menambahkan middleware `auth` pada rute `/fix-hosting`. Rute ini sekarang sepenuhnya aman dan hanya bisa diakses saat admin sudah *login*, sementara untuk optimasi tingkat lanjut tetap bisa dilakukan langsung via SSH.
 
 ## 2. 🚨 [Keamanan Kritis] Akses Pintu Belakang Filament Terbuka
 - **Lokasi File**: `app/Models/User.php`
