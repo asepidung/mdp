@@ -6,6 +6,19 @@
   <title>{{ $settings['meta_title'] ?? 'Mbok Dewor Puding - Premium F&B Dessert' }}</title>
   <meta name="description" content="{{ $settings['meta_description'] ?? 'Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor. Puding premium susu asli dengan kualitas rasa premium & kemasan elegan.' }}">
 
+  <!-- Open Graph / WhatsApp / Facebook Sharing SEO Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ url()->current() }}">
+  <meta property="og:title" content="{{ $settings['meta_title'] ?? 'Mbok Dewor Puding - Premium F&B Dessert' }}">
+  <meta property="og:description" content="{{ $settings['meta_description'] ?? 'Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor. Puding premium susu asli dengan kualitas rasa premium & kemasan elegan.' }}">
+  <meta property="og:image" content="{{ asset('assets/img/logo.png') }}">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ $settings['meta_title'] ?? 'Mbok Dewor Puding - Premium F&B Dessert' }}">
+  <meta name="twitter:description" content="{{ $settings['meta_description'] ?? 'Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor. Puding premium susu asli dengan kualitas rasa premium & kemasan elegan.' }}">
+  <meta name="twitter:image" content="{{ asset('assets/img/logo.png') }}">
+
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
 
