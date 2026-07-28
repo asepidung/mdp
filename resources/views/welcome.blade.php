@@ -30,16 +30,16 @@
   <!-- Schema.org JSON-LD Structured Data for Google Rich Snippets & Business Profile -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "Bakery",
+    "@@context": "https://schema.org",
+    "@@type": "Bakery",
     "name": "Mbok Dewor Puding",
     "image": "{{ asset('assets/img/logo.png') }}",
-    "@id": "{{ url('/') }}",
+    "@@id": "{{ url('/') }}",
     "url": "{{ url('/') }}",
     "telephone": "+62{{ ltrim($settings['whatsapp_number'] ?? '081335374099', '0') }}",
     "priceRange": "$$",
     "address": {
-      "@type": "PostalAddress",
+      "@@type": "PostalAddress",
       "streetAddress": "{{ $settings['address'] ?? 'Indonesia' }}",
       "addressCountry": "ID"
     },
