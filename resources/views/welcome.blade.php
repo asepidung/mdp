@@ -45,7 +45,7 @@
     },
     "description": "{{ $settings['meta_description'] ?? 'Sempurnakan Momen Spesialmu dengan Kelembutan Puding Mbok Dewor.' }}",
     "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
+      "@@type": "OpeningHoursSpecification",
       "dayOfWeek": [
         "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
       ],
