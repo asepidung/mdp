@@ -515,9 +515,14 @@
               <span class="text-[9px] uppercase tracking-widest text-brand-gold font-bold">Premium Dessert</span>
             </div>
           </a>
-                    <p class="text-brand-creamDark/60 text-sm leading-relaxed mb-8 font-light pr-4">
+          <p class="text-brand-creamDark/60 text-sm leading-relaxed mb-8 font-light pr-4">
             Menghadirkan kreasi dessert premium dengan bahan organik pilihan untuk menyempurnakan setiap momen bahagia Anda.
           </p>
+          <div class="flex items-center">
+            <a href="https://bpjph.halal.go.id/cari/sertifikat?no_regis=ID36110079608080826" target="_blank" rel="noopener noreferrer" class="hover:scale-105 transition-transform duration-300">
+              <img src="{{ asset('assets/img/halal/halal.png') }}" alt="Sertifikat Halal Indonesia" class="h-16 sm:h-20 w-auto rounded drop-shadow-md">
+            </a>
+          </div>
         </div>
         
         <!-- Links -->
