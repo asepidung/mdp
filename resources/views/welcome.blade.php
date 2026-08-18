@@ -574,8 +574,8 @@
         
       </div>
       
-      <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-[11px] text-brand-creamDark/40">
-        <p>&copy; 2026 Mbok Dewor Puding. Hak cipta dilindungi. <span class="mx-1 hidden md:inline">|</span> <span class="block md:inline mt-1 md:mt-0">The artisan <a href="https://instagram.com/asep_idung" target="_blank" class="text-brand-gold hover:text-white transition-colors font-semibold">saepullrock</a> Ver 1.2.1</span></p>
+      <div class="border-t border-brand-creamDark/20 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-sm text-brand-creamDark/40">
+        <p>&copy; 2026 Mbok Dewor Puding. Hak cipta dilindungi. <span class="mx-1 hidden md:inline">|</span> <span class="block md:inline mt-1 md:mt-0">The artisan <a href="https://saepullrock.tech/" target="_blank" class="text-brand-gold hover:text-white transition-colors font-semibold">idnx</a> Ver 1.2.1</span></p>
         <p class="mt-3 md:mt-0">Dirancang secara artisan untuk rasa yang tak terlupakan.</p>
       </div>
     </div>
